@@ -26,7 +26,7 @@
             position: relative;
         }
 
-        /* Liquid Motion Glowing Background */
+        /* Liquid Motion Background */
         .bg-liquid-container {
             position: fixed;
             top: 0;
@@ -84,7 +84,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Ad Banner Wrapper */
+        /* Ad Frame */
         .ad-banner-frame {
             position: relative;
             z-index: 10;
@@ -137,7 +137,7 @@
             box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
         }
 
-        /* Glassmorphism Card */
+        /* Card Container */
         .glass-card {
             position: relative;
             z-index: 10;
@@ -146,12 +146,10 @@
             max-width: 680px;
             background: rgba(15, 23, 42, 0.75);
             backdrop-filter: blur(35px);
-            -webkit-backdrop-filter: blur(35px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 28px;
             padding: 28px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8),
-                        inset 0 0 25px rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
             animation: cardFadeIn 0.5s ease-in-out forwards;
         }
 
@@ -198,69 +196,48 @@
             outline: none;
             transition: all 0.3s ease;
             margin-bottom: 16px;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
         }
 
-        .glowing-textarea { height: 95px; resize: none; }
+        .glowing-textarea { height: 90px; resize: none; }
 
-        .glowing-input:focus, .glowing-textarea:focus {
-            border-color: #00f2fe;
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4), inset 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        /* Image Upload (+) Section */
-        .upload-section {
+        /* Action Row: (+) Upload Button Beside Generate Button */
+        .action-control-row {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 20px;
-            background: rgba(2, 6, 23, 0.5);
-            padding: 10px;
-            border-radius: 16px;
-            border: 1px dashed rgba(255, 255, 255, 0.2);
+            margin-top: 10px;
+            margin-bottom: 15px;
         }
 
         .btn-add-img {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 48px;
-            height: 48px;
+            width: 54px;
+            height: 54px;
             background: linear-gradient(135deg, #00f2fe, #7928ca);
-            border-radius: 14px;
-            font-size: 1.8rem;
+            border-radius: 16px;
+            font-size: 2rem;
             font-weight: 800;
             color: #fff;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.3s;
             border: none;
             flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
         }
 
         .btn-add-img:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+            transform: scale(1.05);
+            box-shadow: 0 0 22px rgba(0, 242, 254, 0.8);
         }
 
-        .upload-preview-text {
-            font-size: 0.82rem;
-            color: #94a3b8;
-        }
-
-        .preview-img-tag {
-            max-height: 45px;
-            border-radius: 8px;
-            display: none;
-            border: 1px solid #00f2fe;
-        }
-
-        /* Submit Button */
         .btn-glow-submit {
-            width: 100%;
-            padding: 16px;
+            flex: 1;
+            height: 54px;
             border: none;
-            border-radius: 18px;
-            font-size: 1.05rem;
+            border-radius: 16px;
+            font-size: 1rem;
             font-weight: 800;
             color: #ffffff;
             background: linear-gradient(135deg, #00f2fe, #7928ca, #ff007f);
@@ -268,7 +245,7 @@
             animation: gradientGlow 4s ease infinite;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 4px 25px rgba(255, 0, 127, 0.4);
+            box-shadow: 0 4px 20px rgba(255, 0, 127, 0.4);
         }
 
         @keyframes gradientGlow {
@@ -277,14 +254,35 @@
             100% { background-position: 0% 50%; }
         }
 
-        .btn-glow-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 35px rgba(0, 242, 254, 0.7);
+        .preview-bar {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            background: rgba(2, 6, 23, 0.6);
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid #00f2fe;
+            margin-bottom: 15px;
+        }
+
+        .preview-bar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .preview-bar span {
+            font-size: 0.8rem;
+            color: #38bdf8;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .result-area {
             display: none;
-            margin-top: 22px;
+            margin-top: 20px;
             text-align: center;
         }
 
@@ -292,7 +290,7 @@
             width: 100%;
             border-radius: 18px;
             border: 2px solid rgba(0, 242, 254, 0.5);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(0, 242, 254, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
         .chat-response-box {
@@ -313,18 +311,12 @@
             display: inline-block;
             margin-top: 15px;
             padding: 12px 30px;
-            background: linear-gradient(135deg, #ffffff, #e2e8f0);
+            background: #ffffff;
             color: #000000;
             text-decoration: none;
             border-radius: 14px;
             font-weight: 800;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
             transition: 0.3s;
-        }
-
-        .btn-download:hover {
-            transform: scale(1.05);
-            background: #00f2fe;
         }
 
         .loading-spinner {
@@ -333,13 +325,11 @@
             color: #00f2fe;
             text-align: center;
             font-weight: 600;
-            font-size: 0.95rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- Liquid Background -->
     <div class="bg-liquid-container">
         <div class="liquid-blob blob-1"></div>
         <div class="liquid-blob blob-2"></div>
@@ -351,43 +341,43 @@
         <iframe src="https://www.effectivecpmnetwork.com/wxfnq4wq2j?key=66e25978eb21df681c2911918ba91681" style="width:100%; height:60px; border:none; border-radius:10px; overflow:hidden;" scrolling="no"></iframe>
     </div>
 
-    <!-- Tab Navigation -->
+    <!-- Navigation Tabs -->
     <div class="tab-menu">
         <button class="tab-btn active" onclick="switchTab('thumbCard', this)">🎨 3D Thumbnail Studio</button>
         <button class="tab-btn" onclick="switchTab('chatCard', this)">💬 AI Assistant</button>
     </div>
 
-    <!-- TAB 1: 3D THUMBNAIL GENERATOR -->
+    <!-- TAB 1: THUMBNAIL GENERATOR -->
     <div id="thumbCard" class="glass-card active">
         <h2>FLUX 3D AI Thumbnail Generator</h2>
         <p class="sub-text">3D Gold/Silver Metallic Text, Neon Lights & DJ Bus Style Creation</p>
 
-        <!-- Main Title Text Input -->
         <label class="input-label">✍️ Thumbnail එකේ පෙනෙන්න ඕන 3D Title/Text එක (අකුරු):</label>
-        <input type="text" id="titleInput" class="glowing-input" placeholder="උදා: DJ NONSTOP SINHALA 2026 VS 2027">
+        <input type="text" id="titleInput" class="glowing-input" placeholder="උදා: DJ NONSTOP SINHALA 2026">
 
-        <!-- Visual Elements Description Input -->
         <label class="input-label">🖼️ පසුබිමේ තිබිය යුතු රූප විස්තරය (Visual Theme):</label>
-        <textarea id="thumbInput" class="glowing-textarea" placeholder="උදා: Modified Sri Lankan Bus with neon glowing lights, massive speaker stacks, explosive stage lasers, colorful smoke background"></textarea>
+        <textarea id="thumbInput" class="glowing-textarea" placeholder="ගින්දර වගේ සුපිරියට පින්තුරය හදන්න..."></textarea>
 
-        <!-- (+) Reference Image Attachment Option -->
-        <div class="upload-section">
-            <label for="imgUpload" class="btn-add-img">+</label>
-            <input type="file" id="imgUpload" accept="image/*" style="display:none;" onchange="previewImage(event)">
-            <div>
-                <div class="upload-preview-text" id="uploadStatusText">ඡායාරූපයක් (Photo) එකතු කිරීමට (+) ක්ලික් කරන්න</div>
-                <img id="imagePreview" class="preview-img-tag" alt="Uploaded Preview">
-            </div>
+        <!-- Preview bar for uploaded image -->
+        <div id="previewBar" class="preview-bar">
+            <img id="imagePreview" src="" alt="Preview">
+            <span id="uploadStatusText">ඡායාරූපය එක් කර ඇත</span>
         </div>
 
-        <button class="btn-glow-submit" onclick="generateProThumbnail()">Generate 3D Metallic Thumbnail ✨</button>
+        <!-- Action Row: (+) Button next to Generate Button -->
+        <div class="action-control-row">
+            <label for="imgUpload" class="btn-add-img" title="Photo එකක් එකතු කරන්න">+</label>
+            <input type="file" id="imgUpload" accept="image/*" style="display:none;" onchange="previewImage(event)">
+            
+            <button class="btn-glow-submit" onclick="generateProThumbnail()">Generate 3D Metallic Thumbnail ✨</button>
+        </div>
 
-        <div id="thumbLoader" class="loading-spinner">⚡ FLUX Pro AI මාදිලිය මගින් Ultra 3D Thumbnail එක නිර්මාණය වෙමින් පවතී...</div>
+        <div id="thumbLoader" class="loading-spinner">⚡ FLUX Pro AI මගින් Ultra 3D Thumbnail එක නිර්මාණය වේ...</div>
 
         <div id="thumbResult" class="result-area">
             <img id="outputImage" src="" alt="AI Generated Thumbnail">
             <br>
-            <a href="#" id="downloadBtn" download="vineth-3d-thumbnail.png" class="btn-download">Download Image 📥</a>
+            <a href="#" id="downloadBtn" download="3d-thumbnail.png" class="btn-download">Download Image 📥</a>
         </div>
     </div>
 
@@ -396,11 +386,11 @@
         <h2>Smart AI Assistant</h2>
         <p class="sub-text">Ask anything accurately in Sinhala or English</p>
 
-        <textarea id="chatInput" class="glowing-textarea" placeholder="ඔබට දැනගැනීමට අවශ්‍ය ඕනෑම දෙයක් මෙතැන ටයිප් කරන්න... (උදා: YouTube චැනල් එකක් ඉක්මනින් සබ්ස්ක්‍රයිබ්ස් වැඩි කරගන්නේ කොහොමද?)"></textarea>
+        <textarea id="chatInput" class="glowing-textarea" placeholder="ඔබට දැනගැනීමට අවශ්‍ය ඕනෑම දෙයක් මෙතැන ටයිප් කරන්න..."></textarea>
 
-        <button class="btn-glow-submit" onclick="askAIAssistant()">Ask AI Assistant 🚀</button>
+        <button class="btn-glow-submit" style="width:100%;" onclick="askAIAssistant()">Ask AI Assistant 🚀</button>
 
-        <div id="chatLoader" class="loading-spinner">🤖 AI පිළිතුර විශ්ලේෂණය කරමින් පවතී... මොහොතක් රැඳෙන්න...</div>
+        <div id="chatLoader" class="loading-spinner">🤖 AI පිළිතුර සකස් කරමින් පවතී...</div>
 
         <div id="chatResult" class="result-area">
             <div id="chatResponse" class="chat-response-box"></div>
@@ -421,23 +411,21 @@
         }
 
         // Preview Attached Image
-        let uploadedImageName = "";
         function previewImage(event) {
             const file = event.target.files[0];
             if (file) {
-                uploadedImageName = file.name;
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const img = document.getElementById('imagePreview');
                     img.src = e.target.result;
-                    img.style.display = 'block';
-                    document.getElementById('uploadStatusText').innerText = "එක් කළ පින්තූරය: " + file.name;
+                    document.getElementById('previewBar').style.display = 'flex';
+                    document.getElementById('uploadStatusText').innerText = "ඡායාරූපය එක් කර ඇත: " + file.name;
                 }
                 reader.readAsDataURL(file);
             }
         }
 
-        // 1. FLUX AI Ultra-3D Thumbnail Generator
+        // 1. Image Generator
         function generateProThumbnail() {
             const titleText = document.getElementById('titleInput').value.trim();
             const visualPrompt = document.getElementById('thumbInput').value.trim();
@@ -448,7 +436,7 @@
             const downloadBtn = document.getElementById('downloadBtn');
 
             if (!titleText && !visualPrompt) {
-                alert("කරුණාකර Thumbnail එකේ පෙනෙන්න ඕන අකුරු හෝ පසුබිම් විස්තරය ඇතුළත් කරන්න!");
+                alert("කරුණාකර විස්තරයක් හෝ Text එකක් ඇතුළත් කරන්න!");
                 return;
             }
 
@@ -457,23 +445,21 @@
             loader.style.display = "block";
             resultArea.style.display = "none";
 
-            // Advanced Sri Lankan YouTube Style 3D Text & Visual Prompt Assembly
-            let fullPrompt = "Sri Lankan YouTube Thumbnail style, hyper-realistic, 8k resolution, cinematic lighting. ";
+            let fullPrompt = "Sri Lankan YouTube DJ Nonstop Style Thumbnail, 8k resolution, ultra realistic. ";
             
             if (titleText) {
-                fullPrompt += `Giant bold 3D metallic gold and chrome silver glowing typography with dark bevel overlay reading '${titleText}', vibrant cyan blue and neon red electric outlines, neon glowing text effect. `;
+                fullPrompt += `Heavy bold 3D metallic gold and shiny chrome silver typography with dark stroke reading '${titleText}', neon glow outline effects. `;
             }
 
             if (visualPrompt) {
-                fullPrompt += `Background theme: ${visualPrompt}, explosive stage light beams, DJ music setup, party concert atmosphere, high contrast, trending on artstation.`;
+                fullPrompt += `Visual background details: ${visualPrompt}, glowing party lights, lasers, high contrast background.`;
             } else {
-                fullPrompt += `Background theme: Modified Sri Lankan Leyland bus with colorful neon LED lights, concert speakers, explosive party laser lights, smoke stage backdrop.`;
+                fullPrompt += `Visual background details: Modified Sri Lankan Leyland bus, DJ party sound speakers, stage laser beams, smoke background.`;
             }
 
             const encodedPrompt = encodeURIComponent(fullPrompt);
-            const seed = Math.floor(Math.random() * 9999999);
+            const seed = Math.floor(Math.random() * 999999);
             
-            // Using FLUX AI model for maximum graphic fidelity & clear 3D font rendering
             const imgUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1280&height=720&nologo=true&seed=${seed}&model=flux`;
 
             outputImg.src = imgUrl;
@@ -484,7 +470,7 @@
             };
         }
 
-        // 2. Powerful Real AI Chat Assistant
+        // 2. Fixed Working AI Chat Assistant
         async function askAIAssistant() {
             const query = document.getElementById('chatInput').value.trim();
             const loader = document.getElementById('chatLoader');
@@ -500,8 +486,8 @@
             resultArea.style.display = "none";
 
             try {
-                const systemPrompt = "You are a smart, expert AI assistant. Provide highly detailed, accurate, and helpful answers in clean Sinhala language.";
-                const apiUrl = `https://text.pollinations.ai/${encodeURIComponent(query)}?system=${encodeURIComponent(systemPrompt)}`;
+                // Free & Unrestricted AI Engine Endpoint
+                const apiUrl = `https://text.pollinations.ai/${encodeURIComponent(query)}?model=openai`;
 
                 const response = await fetch(apiUrl);
                 const aiText = await response.text();
@@ -512,7 +498,7 @@
             } catch (error) {
                 loader.style.display = "none";
                 resultArea.style.display = "block";
-                responseBox.innerText = "❌ පිළිතුර ලබා ගැනීමට නොහැකි විය. කරුණාකර නැවත උත්සාහ කරන්න.";
+                responseBox.innerText = "❌ පිළිතුර සකස් කිරීමේදී ගැටලුවක් විය. කරුණාකර නැවත උත්සාහ කරන්න.";
             }
         }
     </script>
