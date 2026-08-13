@@ -1,506 +1,1553 @@
 <!DOCTYPE html>
 <html lang="si">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vineth AI Studio - Ultra Pro 3D</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            background: #020617;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 20px 12px;
-            overflow-x: hidden;
-            position: relative;
-        }
+<title>Vineth AI Studio - Ultra Pro 3D</title>
 
-        /* Liquid Motion Background */
-        .bg-liquid-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-            overflow: hidden;
-            pointer-events: none;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-        .liquid-blob {
-            position: absolute;
-            filter: blur(80px);
-            opacity: 0.65;
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 70%;
-            animation: liquidFlow 10s ease-in-out infinite alternate, rotateBlob 16s linear infinite;
-        }
+<style>
 
-        .blob-1 {
-            width: 450px;
-            height: 450px;
-            background: linear-gradient(135deg, #00f2fe, #4facfe, #00d2ff);
-            top: -5%;
-            left: -5%;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Plus Jakarta Sans',sans-serif;
+}
 
-        .blob-2 {
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, #7928ca, #ff007f, #e100ff);
-            bottom: -10%;
-            right: -5%;
-            animation-delay: -3s;
-        }
+body{
+    background:#020617;
+    color:#ffffff;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    padding:20px 12px;
+    overflow-x:hidden;
+    position:relative;
+}
 
-        .blob-3 {
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #ff8c00, #e52e71);
-            top: 40%;
-            left: 30%;
-            opacity: 0.35;
-            animation-delay: -6s;
-        }
+/* Liquid Motion Background */
 
-        @keyframes liquidFlow {
-            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 70%; transform: translate(0, 0) scale(1); }
-            50% { border-radius: 60% 30% 50% 70% / 50% 70% 30% 60%; transform: translate(40px, -30px) scale(1.08); }
-            100% { border-radius: 30% 70% 40% 60% / 60% 40% 70% 30%; transform: translate(-30px, 40px) scale(0.95); }
-        }
+.bg-liquid-container{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    z-index:1;
+    overflow:hidden;
+    pointer-events:none;
+}
 
-        @keyframes rotateBlob {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+.liquid-blob{
+    position:absolute;
+    filter:blur(80px);
+    opacity:.65;
+    border-radius:40% 60% 70% 30% / 40% 50% 60% 70%;
+    animation:
+        liquidFlow 10s ease-in-out infinite alternate,
+        rotateBlob 16s linear infinite;
+}
 
-        /* Ad Frame */
-        .ad-banner-frame {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 650px;
-            margin-bottom: 20px;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            border-radius: 16px;
-            padding: 8px;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
-        }
+.blob-1{
+    width:450px;
+    height:450px;
+    background:linear-gradient(135deg,#00f2fe,#4facfe,#00d2ff);
+    top:-5%;
+    left:-5%;
+}
 
-        /* Tabs Menu */
-        .tab-menu {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            gap: 12px;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(25px);
-            padding: 8px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            margin-bottom: 25px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+.blob-2{
+    width:500px;
+    height:500px;
+    background:linear-gradient(135deg,#7928ca,#ff007f,#e100ff);
+    bottom:-10%;
+    right:-5%;
+    animation-delay:-3s;
+}
 
-        .tab-btn {
-            flex: 1;
-            padding: 14px;
-            border: none;
-            border-radius: 15px;
-            background: transparent;
-            color: #94a3b8;
-            font-size: 0.95rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.4s ease;
-        }
+.blob-3{
+    width:350px;
+    height:350px;
+    background:linear-gradient(135deg,#ff8c00,#e52e71);
+    top:40%;
+    left:30%;
+    opacity:.35;
+    animation-delay:-6s;
+}
 
-        .tab-btn.active {
-            background: linear-gradient(135deg, #00f2fe, #7928ca, #ff007f);
-            background-size: 200% 200%;
-            animation: gradientGlow 3s ease infinite;
-            color: #ffffff;
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
-        }
+@keyframes liquidFlow{
+    0%{
+        border-radius:40% 60% 70% 30% / 40% 50% 60% 70%;
+        transform:translate(0,0) scale(1);
+    }
 
-        /* Card Container */
-        .glass-card {
-            position: relative;
-            z-index: 10;
-            display: none;
-            width: 100%;
-            max-width: 680px;
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(35px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 28px;
-            padding: 28px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            animation: cardFadeIn 0.5s ease-in-out forwards;
-        }
+    50%{
+        border-radius:60% 30% 50% 70% / 50% 70% 30% 60%;
+        transform:translate(40px,-30px) scale(1.08);
+    }
 
-        .glass-card.active { display: block; }
+    100%{
+        border-radius:30% 70% 40% 60% / 60% 40% 70% 30%;
+        transform:translate(-30px,40px) scale(.95);
+    }
+}
 
-        @keyframes cardFadeIn {
-            from { opacity: 0; transform: translateY(15px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
+@keyframes rotateBlob{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
 
-        h2 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            text-align: center;
-            background: linear-gradient(135deg, #00f2fe, #ff007f, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 6px;
-        }
+/* Ad Frame */
 
-        p.sub-text {
-            text-align: center;
-            color: #94a3b8;
-            font-size: 0.88rem;
-            margin-bottom: 20px;
-        }
+.ad-banner-frame{
+    position:relative;
+    z-index:10;
+    width:100%;
+    max-width:650px;
+    margin-bottom:20px;
+    background:rgba(15,23,42,.6);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(56,189,248,.4);
+    border-radius:16px;
+    padding:8px;
+    box-shadow:0 0 20px rgba(56,189,248,.2);
+}
 
-        .input-label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #38bdf8;
-            margin-bottom: 6px;
-        }
+/* Tabs */
 
-        .glowing-input, .glowing-textarea {
-            width: 100%;
-            background: rgba(2, 6, 23, 0.85);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 16px;
-            padding: 14px;
-            color: #ffffff;
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.3s ease;
-            margin-bottom: 16px;
-        }
+.tab-menu{
+    position:relative;
+    z-index:10;
+    display:flex;
+    gap:12px;
+    background:rgba(15,23,42,.7);
+    backdrop-filter:blur(25px);
+    padding:8px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.15);
+    margin-bottom:25px;
+    width:100%;
+    max-width:420px;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
 
-        .glowing-textarea { height: 90px; resize: none; }
+.tab-btn{
+    flex:1;
+    padding:14px;
+    border:none;
+    border-radius:15px;
+    background:transparent;
+    color:#94a3b8;
+    font-size:.95rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:all .4s ease;
+}
 
-        /* Action Row: (+) Upload Button Beside Generate Button */
-        .action-control-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 10px;
-            margin-bottom: 15px;
-        }
+.tab-btn.active{
+    background:linear-gradient(135deg,#00f2fe,#7928ca,#ff007f);
+    background-size:200% 200%;
+    animation:gradientGlow 3s ease infinite;
+    color:#fff;
+    box-shadow:0 0 20px rgba(0,242,254,.6);
+}
 
-        .btn-add-img {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 54px;
-            height: 54px;
-            background: linear-gradient(135deg, #00f2fe, #7928ca);
-            border-radius: 16px;
-            font-size: 2rem;
-            font-weight: 800;
-            color: #fff;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.3s;
-            border: none;
-            flex-shrink: 0;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
-        }
+/* Card */
 
-        .btn-add-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 22px rgba(0, 242, 254, 0.8);
-        }
+.glass-card{
+    position:relative;
+    z-index:10;
+    display:none;
+    width:100%;
+    max-width:680px;
+    background:rgba(15,23,42,.75);
+    backdrop-filter:blur(35px);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:28px;
+    padding:28px;
+    box-shadow:0 20px 50px rgba(0,0,0,.8);
+    animation:cardFadeIn .5s ease-in-out forwards;
+}
 
-        .btn-glow-submit {
-            flex: 1;
-            height: 54px;
-            border: none;
-            border-radius: 16px;
-            font-size: 1rem;
-            font-weight: 800;
-            color: #ffffff;
-            background: linear-gradient(135deg, #00f2fe, #7928ca, #ff007f);
-            background-size: 200% 200%;
-            animation: gradientGlow 4s ease infinite;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 4px 20px rgba(255, 0, 127, 0.4);
-        }
+.glass-card.active{
+    display:block;
+}
 
-        @keyframes gradientGlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+@keyframes cardFadeIn{
+    from{
+        opacity:0;
+        transform:translateY(15px) scale(.98);
+    }
 
-        .preview-bar {
-            display: none;
-            align-items: center;
-            gap: 10px;
-            background: rgba(2, 6, 23, 0.6);
-            padding: 8px 12px;
-            border-radius: 12px;
-            border: 1px solid #00f2fe;
-            margin-bottom: 15px;
-        }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
 
-        .preview-bar img {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            object-fit: cover;
-        }
+h2{
+    font-size:1.8rem;
+    font-weight:800;
+    text-align:center;
+    background:linear-gradient(135deg,#00f2fe,#ff007f,#ffd700);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:6px;
+}
 
-        .preview-bar span {
-            font-size: 0.8rem;
-            color: #38bdf8;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+p.sub-text{
+    text-align:center;
+    color:#94a3b8;
+    font-size:.88rem;
+    margin-bottom:20px;
+}
 
-        .result-area {
-            display: none;
-            margin-top: 20px;
-            text-align: center;
-        }
+.input-label{
+    display:block;
+    font-size:.85rem;
+    font-weight:700;
+    color:#38bdf8;
+    margin-bottom:6px;
+}
 
-        .result-area img {
-            width: 100%;
-            border-radius: 18px;
-            border: 2px solid rgba(0, 242, 254, 0.5);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
+.glowing-input,
+.glowing-textarea{
+    width:100%;
+    background:rgba(2,6,23,.85);
+    border:1px solid rgba(56,189,248,.3);
+    border-radius:16px;
+    padding:14px;
+    color:#fff;
+    font-size:.95rem;
+    outline:none;
+    transition:all .3s ease;
+    margin-bottom:16px;
+}
 
-        .chat-response-box {
-            background: rgba(2, 6, 23, 0.9);
-            border: 1px solid rgba(0, 242, 254, 0.4);
-            border-radius: 18px;
-            padding: 20px;
-            color: #f1f5f9;
-            font-size: 0.95rem;
-            text-align: left;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
-            margin-top: 15px;
-        }
+.glowing-textarea{
+    height:90px;
+    resize:none;
+}
 
-        .btn-download {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 30px;
-            background: #ffffff;
-            color: #000000;
-            text-decoration: none;
-            border-radius: 14px;
-            font-weight: 800;
-            transition: 0.3s;
-        }
+/* API Key */
 
-        .loading-spinner {
-            display: none;
-            margin-top: 15px;
-            color: #00f2fe;
-            text-align: center;
-            font-weight: 600;
-        }
-    </style>
+.api-box{
+    margin-bottom:18px;
+    padding:14px;
+    border-radius:16px;
+    background:rgba(2,6,23,.75);
+    border:1px solid rgba(255,215,0,.25);
+}
+
+.api-title{
+    color:#ffd700;
+    font-size:.82rem;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.api-note{
+    color:#94a3b8;
+    font-size:.72rem;
+    line-height:1.5;
+    margin-top:6px;
+}
+
+.api-row{
+    display:flex;
+    gap:8px;
+}
+
+.api-row input{
+    flex:1;
+    min-width:0;
+    background:#020617;
+    color:#fff;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:12px;
+    padding:11px;
+    outline:none;
+}
+
+.api-save{
+    border:none;
+    border-radius:12px;
+    padding:0 15px;
+    background:linear-gradient(135deg,#00f2fe,#7928ca);
+    color:#fff;
+    font-weight:800;
+    cursor:pointer;
+}
+
+/* Action Row */
+
+.action-control-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:10px;
+    margin-bottom:15px;
+}
+
+.btn-add-img{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:54px;
+    height:54px;
+    background:linear-gradient(135deg,#00f2fe,#7928ca);
+    border-radius:16px;
+    font-size:2rem;
+    font-weight:800;
+    color:#fff;
+    cursor:pointer;
+    transition:transform .2s,box-shadow .3s;
+    border:none;
+    flex-shrink:0;
+    box-shadow:0 0 15px rgba(0,242,254,.4);
+}
+
+.btn-add-img:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 22px rgba(0,242,254,.8);
+}
+
+.btn-glow-submit{
+    flex:1;
+    height:54px;
+    border:none;
+    border-radius:16px;
+    font-size:1rem;
+    font-weight:800;
+    color:#fff;
+    background:linear-gradient(135deg,#00f2fe,#7928ca,#ff007f);
+    background-size:200% 200%;
+    animation:gradientGlow 4s ease infinite;
+    cursor:pointer;
+    transition:transform .2s,box-shadow .3s;
+    box-shadow:0 4px 20px rgba(255,0,127,.4);
+}
+
+@keyframes gradientGlow{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+/* Preview */
+
+.preview-bar{
+    display:none;
+    align-items:center;
+    gap:10px;
+    background:rgba(2,6,23,.6);
+    padding:8px 12px;
+    border-radius:12px;
+    border:1px solid #00f2fe;
+    margin-bottom:15px;
+}
+
+.preview-bar img{
+    width:40px;
+    height:40px;
+    border-radius:8px;
+    object-fit:cover;
+}
+
+.preview-bar span{
+    font-size:.8rem;
+    color:#38bdf8;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+/* Result */
+
+.result-area{
+    display:none;
+    margin-top:20px;
+    text-align:center;
+}
+
+.result-area img{
+    width:100%;
+    border-radius:18px;
+    border:2px solid rgba(0,242,254,.5);
+    box-shadow:0 10px 30px rgba(0,0,0,.8);
+}
+
+.chat-response-box{
+    background:rgba(2,6,23,.9);
+    border:1px solid rgba(0,242,254,.4);
+    border-radius:18px;
+    padding:20px;
+    color:#f1f5f9;
+    font-size:.95rem;
+    text-align:left;
+    line-height:1.6;
+    white-space:pre-wrap;
+    box-shadow:0 0 20px rgba(0,242,254,.2);
+    margin-top:15px;
+}
+
+.btn-download{
+    display:inline-block;
+    margin-top:15px;
+    padding:12px 30px;
+    background:#fff;
+    color:#000;
+    text-decoration:none;
+    border-radius:14px;
+    font-weight:800;
+    transition:.3s;
+}
+
+.loading-spinner{
+    display:none;
+    margin-top:15px;
+    color:#00f2fe;
+    text-align:center;
+    font-weight:600;
+}
+
+.status{
+    display:none;
+    margin-top:10px;
+    padding:10px;
+    border-radius:12px;
+    background:rgba(0,242,254,.08);
+    border:1px solid rgba(0,242,254,.2);
+    color:#94a3b8;
+    font-size:.75rem;
+    text-align:center;
+}
+
+@media(max-width:600px){
+
+    .glass-card{
+        padding:20px;
+    }
+
+    .tab-btn{
+        font-size:.78rem;
+        padding:12px 8px;
+    }
+
+    h2{
+        font-size:1.45rem;
+    }
+
+}
+
+</style>
 </head>
+
 <body>
 
-    <div class="bg-liquid-container">
-        <div class="liquid-blob blob-1"></div>
-        <div class="liquid-blob blob-2"></div>
-        <div class="liquid-blob blob-3"></div>
-    </div>
 
-    <!-- Ad Frame -->
-    <div class="ad-banner-frame">
-        <iframe src="https://www.effectivecpmnetwork.com/wxfnq4wq2j?key=66e25978eb21df681c2911918ba91681" style="width:100%; height:60px; border:none; border-radius:10px; overflow:hidden;" scrolling="no"></iframe>
-    </div>
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
 
-    <!-- Navigation Tabs -->
-    <div class="tab-menu">
-        <button class="tab-btn active" onclick="switchTab('thumbCard', this)">🎨 3D Thumbnail Studio</button>
-        <button class="tab-btn" onclick="switchTab('chatCard', this)">💬 AI Assistant</button>
-    </div>
+<div class="bg-liquid-container">
 
-    <!-- TAB 1: THUMBNAIL GENERATOR -->
-    <div id="thumbCard" class="glass-card active">
-        <h2>FLUX 3D AI Thumbnail Generator</h2>
-        <p class="sub-text">3D Gold/Silver Metallic Text, Neon Lights & DJ Bus Style Creation</p>
+    <div class="liquid-blob blob-1"></div>
 
-        <label class="input-label">✍️ Thumbnail එකේ පෙනෙන්න ඕන 3D Title/Text එක (අකුරු):</label>
-        <input type="text" id="titleInput" class="glowing-input" placeholder="උදා: DJ NONSTOP SINHALA 2026">
+    <div class="liquid-blob blob-2"></div>
 
-        <label class="input-label">🖼️ පසුබිමේ තිබිය යුතු රූප විස්තරය (Visual Theme):</label>
-        <textarea id="thumbInput" class="glowing-textarea" placeholder="ගින්දර වගේ සුපිරියට පින්තුරය හදන්න..."></textarea>
+    <div class="liquid-blob blob-3"></div>
 
-        <!-- Preview bar for uploaded image -->
-        <div id="previewBar" class="preview-bar">
-            <img id="imagePreview" src="" alt="Preview">
-            <span id="uploadStatusText">ඡායාරූපය එක් කර ඇත</span>
+</div>
+
+
+<!-- =====================================================
+     ORIGINAL AD
+===================================================== -->
+
+<div class="ad-banner-frame">
+
+    <iframe
+        src="https://www.effectivecpmnetwork.com/wxfnq4wq2j?key=66e25978eb21df681c2911918ba91681"
+        style="width:100%;height:60px;border:none;border-radius:10px;overflow:hidden;"
+        scrolling="no">
+    </iframe>
+
+</div>
+
+
+<!-- =====================================================
+     TABS
+===================================================== -->
+
+<div class="tab-menu">
+
+    <button
+        class="tab-btn active"
+        onclick="switchTab('thumbCard',this)">
+
+        🎨 3D Thumbnail Studio
+
+    </button>
+
+
+    <button
+        class="tab-btn"
+        onclick="switchTab('chatCard',this)">
+
+        💬 AI Assistant
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     THUMBNAIL STUDIO
+===================================================== -->
+
+<div
+    id="thumbCard"
+    class="glass-card active">
+
+    <h2>
+        FLUX 3D AI Thumbnail Generator
+    </h2>
+
+    <p class="sub-text">
+        3D Gold/Silver Metallic Text, Neon Lights & DJ Bus Style Creation
+    </p>
+
+
+    <!-- API KEY -->
+
+    <div class="api-box">
+
+        <div class="api-title">
+            🔐 OpenAI API Key
         </div>
 
-        <!-- Action Row: (+) Button next to Generate Button -->
-        <div class="action-control-row">
-            <label for="imgUpload" class="btn-add-img" title="Photo එකක් එකතු කරන්න">+</label>
-            <input type="file" id="imgUpload" accept="image/*" style="display:none;" onchange="previewImage(event)">
-            
-            <button class="btn-glow-submit" onclick="generateProThumbnail()">Generate 3D Metallic Thumbnail ✨</button>
+        <div class="api-row">
+
+            <input
+                id="apiKey"
+                type="password"
+                placeholder="sk-...">
+
+            <button
+                class="api-save"
+                onclick="saveAPIKey()">
+
+                Save
+
+            </button>
+
         </div>
 
-        <div id="thumbLoader" class="loading-spinner">⚡ FLUX Pro AI මගින් Ultra 3D Thumbnail එක නිර්මාණය වේ...</div>
-
-        <div id="thumbResult" class="result-area">
-            <img id="outputImage" src="" alt="AI Generated Thumbnail">
-            <br>
-            <a href="#" id="downloadBtn" download="3d-thumbnail.png" class="btn-download">Download Image 📥</a>
+        <div class="api-note">
+            API key එක browser එකේ local storage එකේ save වේ.
+            Public website එකකට secret API key එක embed කිරීම ආරක්ෂිත නොවේ.
         </div>
+
     </div>
 
-    <!-- TAB 2: AI CHAT ASSISTANT -->
-    <div id="chatCard" class="glass-card">
-        <h2>Smart AI Assistant</h2>
-        <p class="sub-text">Ask anything accurately in Sinhala or English</p>
 
-        <textarea id="chatInput" class="glowing-textarea" placeholder="ඔබට දැනගැනීමට අවශ්‍ය ඕනෑම දෙයක් මෙතැන ටයිප් කරන්න..."></textarea>
+    <!-- TITLE -->
 
-        <button class="btn-glow-submit" style="width:100%;" onclick="askAIAssistant()">Ask AI Assistant 🚀</button>
+    <label class="input-label">
 
-        <div id="chatLoader" class="loading-spinner">🤖 AI පිළිතුර සකස් කරමින් පවතී...</div>
+        ✍️ Thumbnail එකේ පෙනෙන්න ඕන 3D Title/Text එක (අකුරු):
 
-        <div id="chatResult" class="result-area">
-            <div id="chatResponse" class="chat-response-box"></div>
-        </div>
+    </label>
+
+
+    <input
+        type="text"
+        id="titleInput"
+        class="glowing-input"
+        placeholder="උදා: DJ NONSTOP SINHALA 2026">
+
+
+    <!-- VISUAL -->
+
+    <label class="input-label">
+
+        🖼️ පසුබිමේ තිබිය යුතු රූප විස්තරය (Visual Theme):
+
+    </label>
+
+
+    <textarea
+        id="thumbInput"
+        class="glowing-textarea"
+        placeholder="ගින්දර වගේ සුපිරියට පින්තුරය හදන්න..."></textarea>
+
+
+    <!-- PREVIEW -->
+
+    <div
+        id="previewBar"
+        class="preview-bar">
+
+        <img
+            id="imagePreview"
+            src=""
+            alt="Preview">
+
+        <span id="uploadStatusText">
+            ඡායාරූපය එක් කර ඇත
+        </span>
+
     </div>
 
-    <script>
-        function switchTab(cardId, btn) {
-            document.querySelectorAll('.glass-card').forEach(card => card.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            
-            document.getElementById(cardId).classList.add('active');
-            btn.classList.add('active');
+
+    <!-- ACTION -->
+
+    <div class="action-control-row">
+
+        <label
+            for="imgUpload"
+            class="btn-add-img"
+            title="Photo එකක් එකතු කරන්න">
+
+            +
+
+        </label>
+
+
+        <input
+            type="file"
+            id="imgUpload"
+            accept="image/*"
+            style="display:none;"
+            onchange="previewImage(event)">
+
+
+        <button
+            class="btn-glow-submit"
+            onclick="generateProThumbnail()">
+
+            Generate 3D Metallic Thumbnail ✨
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="thumbLoader"
+        class="loading-spinner">
+
+        ⚡ GPT Image 2 AI මගින් Ultra 3D Thumbnail එක නිර්මාණය වේ...
+
+    </div>
+
+
+    <div
+        id="thumbStatus"
+        class="status">
+
+        AI image processing...
+
+    </div>
+
+
+    <div
+        id="thumbResult"
+        class="result-area">
+
+        <img
+            id="outputImage"
+            src=""
+            alt="AI Generated Thumbnail">
+
+        <br>
+
+        <a
+            href="#"
+            id="downloadBtn"
+            download="vineth-dj-thumbnail.png"
+            class="btn-download">
+
+            Download Image 📥
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     AI ASSISTANT
+===================================================== -->
+
+<div
+    id="chatCard"
+    class="glass-card">
+
+    <h2>
+        Smart AI Assistant
+    </h2>
+
+    <p class="sub-text">
+        Ask anything accurately in Sinhala or English
+    </p>
+
+
+    <textarea
+        id="chatInput"
+        class="glowing-textarea"
+        placeholder="ඔබට දැනගැනීමට අවශ්‍ය ඕනෑම දෙයක් මෙතැන ටයිප් කරන්න..."></textarea>
+
+
+    <button
+        class="btn-glow-submit"
+        style="width:100%;"
+        onclick="askAIAssistant()">
+
+        Ask AI Assistant 🚀
+
+    </button>
+
+
+    <div
+        id="chatLoader"
+        class="loading-spinner">
+
+        🤖 GPT-5.6 AI පිළිතුර සකස් කරමින් පවතී...
+
+    </div>
+
+
+    <div
+        id="chatResult"
+        class="result-area">
+
+        <div
+            id="chatResponse"
+            class="chat-response-box">
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   API KEY
+===================================================== */
+
+const API_KEY_STORAGE =
+    "vineth_openai_api_key";
+
+
+function loadAPIKey(){
+
+    const key =
+        localStorage.getItem(
+            API_KEY_STORAGE
+        );
+
+    if(key){
+
+        document.getElementById(
+            "apiKey"
+        ).value = key;
+
+    }
+
+}
+
+
+function saveAPIKey(){
+
+    const key =
+        document.getElementById(
+            "apiKey"
+        ).value.trim();
+
+
+    if(!key){
+
+        alert(
+            "කරුණාකර OpenAI API Key එක ඇතුළත් කරන්න."
+        );
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        API_KEY_STORAGE,
+        key
+    );
+
+
+    alert(
+        "✅ OpenAI API Key එක save කළා."
+    );
+
+}
+
+
+function getAPIKey(){
+
+    const input =
+        document.getElementById(
+            "apiKey"
+        ).value.trim();
+
+
+    if(input){
+
+        return input;
+    }
+
+
+    return localStorage.getItem(
+        API_KEY_STORAGE
+    ) || "";
+
+}
+
+
+/* =====================================================
+   TAB SWITCH
+===================================================== */
+
+function switchTab(cardId,btn){
+
+    document
+        .querySelectorAll(".glass-card")
+        .forEach(card =>
+            card.classList.remove("active")
+        );
+
+
+    document
+        .querySelectorAll(".tab-btn")
+        .forEach(b =>
+            b.classList.remove("active")
+        );
+
+
+    document
+        .getElementById(cardId)
+        .classList.add("active");
+
+
+    btn.classList.add("active");
+
+}
+
+
+/* =====================================================
+   AD
+===================================================== */
+
+function triggerAdsterra(){
+
+    window.open(
+        "https://www.effectivecpmnetwork.com/wxfnq4wq2j?key=66e25978eb21df681c2911918ba91681",
+        "_blank"
+    );
+
+}
+
+
+/* =====================================================
+   IMAGE PREVIEW
+===================================================== */
+
+function previewImage(event){
+
+    const file =
+        event.target.files[0];
+
+
+    if(!file){
+
+        return;
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(e){
+
+            const img =
+                document.getElementById(
+                    "imagePreview"
+                );
+
+
+            img.src =
+                e.target.result;
+
+
+            document.getElementById(
+                "previewBar"
+            ).style.display =
+                "flex";
+
+
+            document.getElementById(
+                "uploadStatusText"
+            ).innerText =
+                "ඡායාරූපය එක් කර ඇත: " +
+                file.name;
+
+        };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =====================================================
+   CREATE PROFESSIONAL PROMPT
+===================================================== */
+
+function createThumbnailPrompt(
+    title,
+    visual
+){
+
+    return `
+
+Create a professional Sri Lankan YouTube DJ music thumbnail.
+
+IMPORTANT COMPOSITION:
+
+16:9 landscape YouTube thumbnail.
+
+Place the main person/reference subject on the RIGHT SIDE.
+
+Keep the LEFT SIDE clean and dark enough for large typography.
+
+Use a premium viral Sri Lankan DJ music thumbnail design.
+
+VISUAL STYLE:
+
+Neon pink,
+neon purple,
+gold,
+red,
+blue,
+black.
+
+Professional DJ stage.
+
+Large sound speakers.
+
+Powerful bass speakers.
+
+Laser beams.
+
+Smoke.
+
+Music notes.
+
+Equalizer waveform.
+
+Glowing particles.
+
+Concert lights.
+
+Cinematic lighting.
+
+High contrast.
+
+Glossy 3D poster style.
+
+Premium commercial design.
+
+The result must look like a professional YouTube music thumbnail,
+not like a normal AI artwork.
+
+PERSON:
+
+If an uploaded reference photo exists,
+use that person as the main subject.
+
+Keep the person's recognizable appearance,
+face,
+hair,
+general clothing appearance
+and overall identity.
+
+Place the person on the RIGHT SIDE.
+
+Do not cover the face with text.
+
+TEXT AREA:
+
+LEFT SIDE must have enough empty space for typography.
+
+USER TITLE:
+
+${title || "DJ NONSTOP SINHALA 2026"}
+
+USER VISUAL REQUEST:
+
+${visual || "DJ party, Sri Lankan music bus, giant speakers, neon lights, lasers and smoke."}
+
+DO NOT add random text.
+
+DO NOT add fake words.
+
+DO NOT add random logos.
+
+DO NOT add watermarks.
+
+Do not place text over the person's face.
+
+Make the image energetic,
+beautiful,
+bright,
+professional,
+high contrast,
+and suitable for YouTube.
+
+`;
+}
+
+
+/* =====================================================
+   GENERATE THUMBNAIL
+===================================================== */
+
+async function generateProThumbnail(){
+
+    const title =
+        document.getElementById(
+            "titleInput"
+        ).value.trim();
+
+
+    const visual =
+        document.getElementById(
+            "thumbInput"
+        ).value.trim();
+
+
+    const fileInput =
+        document.getElementById(
+            "imgUpload"
+        );
+
+
+    const loader =
+        document.getElementById(
+            "thumbLoader"
+        );
+
+
+    const status =
+        document.getElementById(
+            "thumbStatus"
+        );
+
+
+    const resultArea =
+        document.getElementById(
+            "thumbResult"
+        );
+
+
+    const output =
+        document.getElementById(
+            "outputImage"
+        );
+
+
+    const download =
+        document.getElementById(
+            "downloadBtn"
+        );
+
+
+    const apiKey =
+        getAPIKey();
+
+
+    if(!apiKey){
+
+        alert(
+            "🔐 මුලින් OpenAI API Key එක ඇතුළත් කරන්න."
+        );
+
+        return;
+    }
+
+
+    if(!title && !visual){
+
+        alert(
+            "කරුණාකර Text එකක් හෝ Visual Description එකක් ඇතුළත් කරන්න!"
+        );
+
+        return;
+    }
+
+
+    /*
+       Keep the original advertisement behavior.
+       If you don't want the ad to open,
+       remove the next line.
+    */
+
+    triggerAdsterra();
+
+
+    loader.style.display =
+        "block";
+
+
+    status.style.display =
+        "block";
+
+
+    resultArea.style.display =
+        "none";
+
+
+    status.innerText =
+        "⚡ GPT Image 2 වෙත request එක යවමින් පවතී...";
+
+
+    try{
+
+        const prompt =
+            createThumbnailPrompt(
+                title,
+                visual
+            );
+
+
+        let response;
+
+
+        /*
+           ==================================================
+           WITH REFERENCE IMAGE
+           ==================================================
+        */
+
+        if(
+            fileInput.files &&
+            fileInput.files.length > 0
+        ){
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "model",
+                "gpt-image-2"
+            );
+
+
+            formData.append(
+                "image",
+                fileInput.files[0]
+            );
+
+
+            formData.append(
+                "prompt",
+                prompt
+            );
+
+
+            formData.append(
+                "size",
+                "1536x1024"
+            );
+
+
+            formData.append(
+                "quality",
+                "high"
+            );
+
+
+            response =
+                await fetch(
+                    "https://api.openai.com/v1/images/edits",
+                    {
+
+                        method:"POST",
+
+                        headers:{
+                            "Authorization":
+                                "Bearer " +
+                                apiKey
+                        },
+
+                        body:formData
+
+                    }
+                );
+
         }
 
-        function triggerAdsterra() {
-            window.open("https://www.effectivecpmnetwork.com/wxfnq4wq2j?key=66e25978eb21df681c2911918ba91681", "_blank");
+
+        /*
+           ==================================================
+           WITHOUT REFERENCE IMAGE
+           ==================================================
+        */
+
+        else{
+
+            response =
+                await fetch(
+                    "https://api.openai.com/v1/images/generations",
+                    {
+
+                        method:"POST",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                "Bearer " +
+                                apiKey
+                        },
+
+                        body:JSON.stringify({
+
+                            model:
+                                "gpt-image-2",
+
+                            prompt:
+                                prompt,
+
+                            size:
+                                "1536x1024",
+
+                            quality:
+                                "high",
+
+                            n:1
+
+                        })
+
+                    }
+                );
+
         }
 
-        // Preview Attached Image
-        function previewImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.getElementById('imagePreview');
-                    img.src = e.target.result;
-                    document.getElementById('previewBar').style.display = 'flex';
-                    document.getElementById('uploadStatusText').innerText = "ඡායාරූපය එක් කර ඇත: " + file.name;
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data?.error?.message ||
+                "OpenAI image generation error."
+            );
+
+        }
+
+
+        const base64 =
+            data?.data?.[0]?.b64_json;
+
+
+        if(!base64){
+
+            throw new Error(
+                "AI image data එක ලැබුණේ නැහැ."
+            );
+
+        }
+
+
+        const imageURL =
+            "data:image/png;base64," +
+            base64;
+
+
+        output.src =
+            imageURL;
+
+
+        download.href =
+            imageURL;
+
+
+        download.download =
+            "vineth-dj-thumbnail.png";
+
+
+        status.innerText =
+            "✅ Thumbnail එක සාර්ථකව නිර්මාණය කළා!";
+
+
+        resultArea.style.display =
+            "block";
+
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        status.innerText =
+            "❌ Error";
+
+
+        alert(
+            "❌ Thumbnail හදන්න බැරි වුණා.\n\n" +
+            error.message
+        );
+
+    }
+
+    finally{
+
+        loader.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   AI ASSISTANT
+===================================================== */
+
+async function askAIAssistant(){
+
+    const query =
+        document.getElementById(
+            "chatInput"
+        ).value.trim();
+
+
+    const loader =
+        document.getElementById(
+            "chatLoader"
+        );
+
+
+    const resultArea =
+        document.getElementById(
+            "chatResult"
+        );
+
+
+    const responseBox =
+        document.getElementById(
+            "chatResponse"
+        );
+
+
+    const apiKey =
+        getAPIKey();
+
+
+    if(!apiKey){
+
+        alert(
+            "🔐 මුලින් Thumbnail Studio එකේ OpenAI API Key එක ඇතුළත් කරන්න."
+        );
+
+        return;
+    }
+
+
+    if(!query){
+
+        alert(
+            "කරුණාකර ප්‍රශ්නයක් ටයිප් කරන්න!"
+        );
+
+        return;
+    }
+
+
+    loader.style.display =
+        "block";
+
+
+    resultArea.style.display =
+        "none";
+
+
+    try{
+
+        const response =
+            await fetch(
+                "https://api.openai.com/v1/responses",
+                {
+
+                    method:"POST",
+
+                    headers:{
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            "Bearer " +
+                            apiKey
+
+                    },
+
+                    body:JSON.stringify({
+
+                        model:
+                            "gpt-5.6",
+
+                        reasoning:{
+                            effort:"medium"
+                        },
+
+                        input:[
+                            {
+                                role:"system",
+
+                                content:
+                                    "You are a helpful AI assistant. Answer Sinhala questions naturally in Sinhala and English questions in English. Give accurate, clear and useful answers."
+                            },
+
+                            {
+                                role:"user",
+
+                                content:
+                                    query
+                            }
+                        ]
+
+                    })
+
                 }
-                reader.readAsDataURL(file);
-            }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data?.error?.message ||
+                "AI response error."
+            );
+
         }
 
-        // 1. Image Generator
-        function generateProThumbnail() {
-            const titleText = document.getElementById('titleInput').value.trim();
-            const visualPrompt = document.getElementById('thumbInput').value.trim();
-            
-            const loader = document.getElementById('thumbLoader');
-            const resultArea = document.getElementById('thumbResult');
-            const outputImg = document.getElementById('outputImage');
-            const downloadBtn = document.getElementById('downloadBtn');
 
-            if (!titleText && !visualPrompt) {
-                alert("කරුණාකර විස්තරයක් හෝ Text එකක් ඇතුළත් කරන්න!");
-                return;
-            }
+        /*
+           Responses API output_text
+        */
 
-            triggerAdsterra();
+        let answer =
+            data.output_text;
 
-            loader.style.display = "block";
-            resultArea.style.display = "none";
 
-            let fullPrompt = "Sri Lankan YouTube DJ Nonstop Style Thumbnail, 8k resolution, ultra realistic. ";
-            
-            if (titleText) {
-                fullPrompt += `Heavy bold 3D metallic gold and shiny chrome silver typography with dark stroke reading '${titleText}', neon glow outline effects. `;
-            }
+        /*
+           Fallback parser
+        */
 
-            if (visualPrompt) {
-                fullPrompt += `Visual background details: ${visualPrompt}, glowing party lights, lasers, high contrast background.`;
-            } else {
-                fullPrompt += `Visual background details: Modified Sri Lankan Leyland bus, DJ party sound speakers, stage laser beams, smoke background.`;
-            }
+        if(!answer){
 
-            const encodedPrompt = encodeURIComponent(fullPrompt);
-            const seed = Math.floor(Math.random() * 999999);
-            
-            const imgUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1280&height=720&nologo=true&seed=${seed}&model=flux`;
+            answer =
+                data.output
+                    ?.filter(
+                        item =>
+                            item.type ===
+                            "message"
+                    )
+                    ?.flatMap(
+                        item =>
+                            item.content || []
+                    )
+                    ?.filter(
+                        item =>
+                            item.type ===
+                            "output_text"
+                    )
+                    ?.map(
+                        item =>
+                            item.text
+                    )
+                    ?.join("\n");
 
-            outputImg.src = imgUrl;
-            outputImg.onload = function() {
-                loader.style.display = "none";
-                resultArea.style.display = "block";
-                downloadBtn.href = imgUrl;
-            };
         }
 
-        // 2. Fixed Working AI Chat Assistant
-        async function askAIAssistant() {
-            const query = document.getElementById('chatInput').value.trim();
-            const loader = document.getElementById('chatLoader');
-            const resultArea = document.getElementById('chatResult');
-            const responseBox = document.getElementById('chatResponse');
 
-            if (!query) {
-                alert("කරුණාකර ප්‍රශ්නයක් ටයිප් කරන්න!");
-                return;
-            }
+        if(!answer){
 
-            loader.style.display = "block";
-            resultArea.style.display = "none";
-
-            try {
-                // Free & Unrestricted AI Engine Endpoint
-                const apiUrl = `https://text.pollinations.ai/${encodeURIComponent(query)}?model=openai`;
-
-                const response = await fetch(apiUrl);
-                const aiText = await response.text();
-
-                loader.style.display = "none";
-                resultArea.style.display = "block";
-                responseBox.innerText = aiText;
-            } catch (error) {
-                loader.style.display = "none";
-                resultArea.style.display = "block";
-                responseBox.innerText = "❌ පිළිතුර සකස් කිරීමේදී ගැටලුවක් විය. කරුණාකර නැවත උත්සාහ කරන්න.";
-            }
+            answer =
+                "AI පිළිතුරක් ලැබුණේ නැහැ.";
         }
-    </script>
+
+
+        responseBox.innerText =
+            answer;
+
+
+        resultArea.style.display =
+            "block";
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        responseBox.innerText =
+            "❌ AI පිළිතුර ලබාගැනීමට නොහැකි විය.\n\n" +
+            error.message;
+
+
+        resultArea.style.display =
+            "block";
+
+    }
+
+    finally{
+
+        loader.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD SAVED API KEY
+===================================================== */
+
+loadAPIKey();
+
+</script>
+
 </body>
 </html>
