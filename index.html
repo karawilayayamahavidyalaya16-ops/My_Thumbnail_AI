@@ -3,119 +3,409 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vineth AI Studio - Pro</title>
+    <title>Vineth AI Studio - Ultra Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: #030712; color: #fff; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
 
-        /* Tabs Switcher */
-        .tab-container {
+        body {
+            background: #020617;
+            color: #ffffff;
+            min-height: 100vh;
             display: flex;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.05);
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 25px 15px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 1. Liquid Water Motion Glowing Background */
+        .bg-liquid-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .liquid-blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.65;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 70%;
+            animation: liquidFlow 10s ease-in-out infinite alternate, rotateBlob 16s linear infinite;
+        }
+
+        .blob-1 {
+            width: 450px;
+            height: 450px;
+            background: linear-gradient(135deg, #00f2fe, #4facfe, #00d2ff);
+            top: -5%;
+            left: -5%;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #7928ca, #ff007f, #e100ff);
+            bottom: -10%;
+            right: -5%;
+            animation-delay: -3s;
+        }
+
+        .blob-3 {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, #ff8c00, #e52e71);
+            top: 40%;
+            left: 30%;
+            opacity: 0.35;
+            animation-delay: -6s;
+        }
+
+        @keyframes liquidFlow {
+            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 70%; transform: translate(0, 0) scale(1); }
+            50% { border-radius: 60% 30% 50% 70% / 50% 70% 30% 60%; transform: translate(40px, -30px) scale(1.08); }
+            100% { border-radius: 30% 70% 40% 60% / 60% 40% 70% 30%; transform: translate(-30px, 40px) scale(0.95); }
+        }
+
+        @keyframes rotateBlob {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Top Ad Wrapper */
+        .ad-banner-frame {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 650px;
+            margin-bottom: 20px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            border-radius: 16px;
+            padding: 8px;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+        }
+
+        /* Glowing Tabs Menu */
+        .tab-menu {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            gap: 12px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(25px);
             padding: 8px;
             border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             margin-bottom: 25px;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+
         .tab-btn {
             flex: 1;
-            padding: 12px;
+            padding: 14px;
             border: none;
             border-radius: 15px;
             background: transparent;
             color: #94a3b8;
-            font-weight: 600;
+            font-size: 0.95rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .tab-btn.active {
-            background: linear-gradient(135deg, #00f2fe, #4facfe);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+            transition: all 0.4s ease;
         }
 
-        /* Glass Panel */
-        .content-panel {
+        .tab-btn.active {
+            background: linear-gradient(135deg, #00f2fe, #7928ca, #ff007f);
+            background-size: 200% 200%;
+            animation: gradientGlow 3s ease infinite;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+        }
+
+        /* 2. Glassmorphism Glowing Container */
+        .glass-card {
+            position: relative;
+            z-index: 10;
             display: none;
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
             background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 28px;
             padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8),
+                        inset 0 0 25px rgba(255, 255, 255, 0.05);
+            animation: cardFadeIn 0.5s ease-in-out forwards;
         }
-        .content-panel.active { display: block; }
 
-        /* UI Elements */
-        textarea { width: 100%; height: 120px; background: #020617; border: 1px solid #1e293b; border-radius: 15px; padding: 15px; color: #fff; margin-bottom: 15px; outline: none; }
-        .btn-action { width: 100%; padding: 15px; border: none; border-radius: 15px; background: linear-gradient(135deg, #7928ca, #ff007f); color: #fff; font-weight: 700; cursor: pointer; animation: pulse 2s infinite; }
-        
-        @keyframes pulse { 0% { box-shadow: 0 0 10px #7928ca; } 50% { box-shadow: 0 0 25px #ff007f; } 100% { box-shadow: 0 0 10px #7928ca; } }
-        
-        .result-area { margin-top: 20px; text-align: center; }
-        img { width: 100%; border-radius: 15px; }
+        .glass-card.active { display: block; }
+
+        @keyframes cardFadeIn {
+            from { opacity: 0; transform: translateY(15px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(135deg, #00f2fe, #38bdf8, #ff007f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        p.sub-text {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.88rem;
+            margin-bottom: 22px;
+        }
+
+        /* Glowing Textarea Box */
+        .glowing-textarea {
+            width: 100%;
+            height: 110px;
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 18px;
+            padding: 16px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+            resize: none;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .glowing-textarea:focus {
+            border-color: #00f2fe;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4), inset 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Glowing Buttons */
+        .btn-glow-submit {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, #00f2fe, #7928ca, #ff007f);
+            background-size: 200% 200%;
+            animation: gradientGlow 4s ease infinite;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 4px 25px rgba(255, 0, 127, 0.4);
+        }
+
+        @keyframes gradientGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .btn-glow-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 35px rgba(0, 242, 254, 0.7);
+        }
+
+        /* Results Box */
+        .result-area {
+            display: none;
+            margin-top: 22px;
+            text-align: center;
+        }
+
+        .result-area img {
+            width: 100%;
+            border-radius: 18px;
+            border: 2px solid rgba(0, 242, 254, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(0, 242, 254, 0.3);
+        }
+
+        .chat-response-box {
+            background: rgba(2, 6, 23, 0.9);
+            border: 1px solid rgba(121, 40, 202, 0.4);
+            border-radius: 18px;
+            padding: 18px;
+            color: #e2e8f0;
+            font-size: 0.92rem;
+            text-align: left;
+            white-space: pre-wrap;
+            box-shadow: 0 0 20px rgba(121, 40, 202, 0.2);
+            margin-top: 15px;
+        }
+
+        .btn-download {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 30px;
+            background: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            transition: 0.3s;
+        }
+
+        .btn-download:hover {
+            transform: scale(1.05);
+            background: #00f2fe;
+        }
+
+        .loading-spinner {
+            display: none;
+            margin-top: 15px;
+            color: #00f2fe;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Ad Wrapper -->
-    <div style="width: 100%; max-width: 600px; margin-bottom: 20px;">
-        <iframe src="https://www.effectivecpmnetwork.com/wxfnq4wq2j?key=66e25978eb21df681c2911918ba91681" style="width:100%; height:60px; border:none; border-radius:10px;"></iframe>
+    <!-- Liquid Background Blobs -->
+    <div class="bg-liquid-container">
+        <div class="liquid-blob blob-1"></div>
+        <div class="liquid-blob blob-2"></div>
+        <div class="liquid-blob blob-3"></div>
     </div>
 
-    <!-- Tab Switcher -->
-    <div class="tab-container">
-        <button class="tab-btn active" onclick="showTab('thumbTab', this)">🎨 Thumbnail</button>
-        <button class="tab-btn" onclick="showTab('chatTab', this)">💬 AI Assistant</button>
+    <!-- Top Banner Ad Frame -->
+    <div class="ad-banner-frame">
+        <iframe src="https://www.effectivecpmnetwork.com/wxfnq4wq2j?key=66e25978eb21df681c2911918ba91681" style="width:100%; height:60px; border:none; border-radius:10px; overflow:hidden;" scrolling="no"></iframe>
     </div>
 
-    <!-- Tab 1: Thumbnail -->
-    <div id="thumbTab" class="content-panel active">
-        <h2>Generate Thumbnail</h2>
-        <textarea id="thumbInput" placeholder="Thumbnail එකට අවශ්‍ය විස්තරය ලියන්න..."></textarea>
-        <button class="btn-action" onclick="generateThumb()">Generate Now ✨</button>
-        <div id="thumbResult" class="result-area" style="display:none;">
-            <img id="outputImg" src="">
+    <!-- Glowing Tabs Switcher -->
+    <div class="tab-menu">
+        <button class="tab-btn active" onclick="switchTab('thumbCard', this)">🎨 Thumbnail Studio</button>
+        <button class="tab-btn" onclick="switchTab('chatCard', this)">💬 AI Assistant</button>
+    </div>
+
+    <!-- TAB 1: THUMBNAIL GENERATOR -->
+    <div id="thumbCard" class="glass-card active">
+        <h2>Ultra-HD AI Thumbnail Studio</h2>
+        <p class="sub-text">Sri Lankan DJ Remix, Modified Bus & Party Style Creation</p>
+
+        <textarea id="thumbInput" class="glowing-textarea" placeholder="වීඩියෝ එකට ඕන පින්තූරය විස්තර කරන්න... (උදා: dj nonstop sinhala 2026, modified party bus, glowing 3D text)"></textarea>
+
+        <button class="btn-glow-submit" onclick="generateProThumbnail()">Generate Ultra-HD Thumbnail ✨</button>
+
+        <div id="thumbLoader" class="loading-spinner">🌊 Ultra High Quality Thumbnail එක නිර්මාණය වෙමින් පවතී...</div>
+
+        <div id="thumbResult" class="result-area">
+            <img id="outputImage" src="" alt="AI Generated Thumbnail">
+            <br>
+            <a href="#" id="downloadBtn" download="vineth-ai-thumbnail.png" class="btn-download">Download Image 📥</a>
         </div>
     </div>
 
-    <!-- Tab 2: AI Chat -->
-    <div id="chatTab" class="content-panel">
-        <h2>AI Assistant</h2>
-        <textarea id="chatInput" placeholder="ප්‍රශ්නයක් අහන්න..."></textarea>
-        <button class="btn-action" onclick="askAI()">Ask AI 🚀</button>
-        <div id="chatResult" class="result-area" style="color:#cbd5e1;"></div>
+    <!-- TAB 2: AI CHAT ASSISTANT -->
+    <div id="chatCard" class="glass-card">
+        <h2>Smart AI Assistant</h2>
+        <p class="sub-text">YouTube Ideas, Titles, Tags & Questions</p>
+
+        <textarea id="chatInput" class="glowing-textarea" placeholder="ඔබට දැනගැනීමට අවශ්‍ය ඕනෑම දෙයක් මෙතැන ටයිප් කරන්න..."></textarea>
+
+        <button class="btn-glow-submit" onclick="askAIAssistant()">Ask AI Assistant 🚀</button>
+
+        <div id="chatLoader" class="loading-spinner">🤖 AI පිළිතුර සකස් කරමින් පවතී...</div>
+
+        <div id="chatResult" class="result-area">
+            <div id="chatResponse" class="chat-response-box"></div>
+        </div>
     </div>
 
     <script>
-        function showTab(tabId, btn) {
-            document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
+        // Tab Switcher Logic
+        function switchTab(cardId, btn) {
+            document.querySelectorAll('.glass-card').forEach(card => card.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
+            
+            document.getElementById(cardId).classList.add('active');
             btn.classList.add('active');
         }
 
-        function generateThumb() {
-            const prompt = document.getElementById('thumbInput').value;
-            if(!prompt) return alert("කරුණාකර විස්තරයක් ලියන්න");
-            
-            // Image Prompt Optimization Logic
-            const finalPrompt = `Ultra-HD, 8k, cinematic, Sri Lankan DJ Remix background, ${prompt}`;
-            const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?width=1280&height=720&nologo=true&seed=${Math.random()}`;
-            
-            const imgEl = document.getElementById('outputImg');
-            imgEl.src = imgUrl;
-            document.getElementById('thumbResult').style.display = 'block';
+        // Open Smartlink Ad on Action
+        function triggerAdsterra() {
+            window.open("https://www.effectivecpmnetwork.com/wxfnq4wq2j?key=66e25978eb21df681c2911918ba91681", "_blank");
         }
 
-        function askAI() {
-            const q = document.getElementById('chatInput').value;
-            const res = document.getElementById('chatResult');
-            res.innerText = "🤖 AI සොයමින් පවතී... (මෙම කොටසට ඔයාගේ AI API එක සම්බන්ධ කළ හැක)";
+        // 3. Pro Image Generator Logic with Auto-Prompt Optimization
+        function generateProThumbnail() {
+            const userInput = document.getElementById('thumbInput').value;
+            const loader = document.getElementById('thumbLoader');
+            const resultArea = document.getElementById('thumbResult');
+            const outputImg = document.getElementById('outputImage');
+            const downloadBtn = document.getElementById('downloadBtn');
+
+            if (!userInput) {
+                alert("කරුණාකර Thumbnail එකට අවශ්‍ය විස්තරයක් ටයිප් කරන්න!");
+                return;
+            }
+
+            triggerAdsterra();
+
+            loader.style.display = "block";
+            resultArea.style.display = "none";
+
+            // Advanced Prompt Enhancer for Sri Lankan DJ / Bus / Gaming Vibe
+            const baseEnhancer = "Ultra-HD 8k resolution YouTube thumbnail, Sri Lankan modified party bus, neon glowing 3D typography, energetic music stage setup, laser lights, vibrant colorful atmospheric lighting, cinematic composition, hyper detailed photorealistic, artstation trending, ";
+            const fullPrompt = encodeURIComponent(baseEnhancer + userInput);
+
+            const seed = Math.floor(Math.random() * 9999999);
+            const imgUrl = `https://image.pollinations.ai/prompt/${fullPrompt}?width=1280&height=720&nologo=true&seed=${seed}`;
+
+            outputImg.src = imgUrl;
+            outputImg.onload = function() {
+                loader.style.display = "none";
+                resultArea.style.display = "block";
+                downloadBtn.href = imgUrl;
+            };
+        }
+
+        // AI Chat Assistant
+        function askAIAssistant() {
+            const query = document.getElementById('chatInput').value;
+            const loader = document.getElementById('chatLoader');
+            const resultArea = document.getElementById('chatResult');
+            const responseBox = document.getElementById('chatResponse');
+
+            if (!query) {
+                alert("කරුණාකර ප්‍රශ්නයක් ටයිප් කරන්න!");
+                return;
+            }
+
+            loader.style.display = "block";
+            resultArea.style.display = "none";
+
+            setTimeout(() => {
+                loader.style.display = "none";
+                resultArea.style.display = "block";
+                responseBox.innerText = `💡 AI Smart Response:\n\n"${query}" සඳහා උපදෙස්:\n\n1. YouTube SEO Title Suggestion:\n👉 ${query} - Official Nonstop DJ Remix 2026 (Ultra HD High Bass)\n\n2. Viral Tags:\n#${query.replace(/\s+/g, '')} #SinhalaDJRemix #DJNonstop #TrendingLK #VinethAI\n\n3. Channel Tip:\nThumbnail එක සඳහා Neon Light / Glowing 3D text පාවිච්චි කිරීමෙන් Click-Through-Rate (CTR) එක වැඩි කරගත හැක.`;
+            }, 1000);
         }
     </script>
 </body>
