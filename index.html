@@ -3,402 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vineth AI Thumbnail & Chat Studio</title>
+    <title>Vineth AI Studio - Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: #030712; color: #fff; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; }
 
-        body {
-            background: #030712;
-            color: #ffffff;
-            min-height: 100vh;
+        /* Tabs Switcher */
+        .tab-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 15px;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Animated Liquid Background Blobs */
-        .bg-glow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .liquid-blob {
-            position: absolute;
-            filter: blur(90px);
-            opacity: 0.6;
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 70%;
-            animation: morph 8s ease-in-out infinite alternate, spin 12s linear infinite;
-        }
-
-        .blob-1 {
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, #00f2fe, #4facfe);
-            top: -10%;
-            left: -10%;
-        }
-
-        .blob-2 {
-            width: 550px;
-            height: 550px;
-            background: linear-gradient(135deg, #7928ca, #ff007f);
-            bottom: -10%;
-            right: -10%;
-        }
-
-        @keyframes morph {
-            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 70%; }
-            100% { border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg) scale(1); }
-            100% { transform: rotate(360deg) scale(1.1); }
-        }
-
-        /* Liquid Melting Glass Container */
-        .glass-card {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 720px;
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 28px;
-            padding: 35px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            animation: glassLiquid 6s ease-in-out infinite alternate;
-        }
-
-        @keyframes glassLiquid {
-            0% { border-radius: 28px 28px 28px 28px; }
-            50% { border-radius: 35px 20px 35px 20px; }
-            100% { border-radius: 20px 35px 20px 35px; }
-        }
-
-        h1 {
-            font-size: 2.3rem;
-            font-weight: 700;
-            text-align: center;
-            background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
-
-        p.subtitle {
-            text-align: center;
-            color: #94a3b8;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-        /* Banner Ad Container (Adsterra Direct Link Integration) */
-        .ad-banner-box {
-            display: block;
-            text-decoration: none;
+            gap: 10px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px dashed rgba(56, 189, 248, 0.5);
-            border-radius: 16px;
-            padding: 12px;
-            text-align: center;
+            padding: 8px;
+            border-radius: 20px;
             margin-bottom: 25px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .ad-banner-box:hover {
-            background: rgba(56, 189, 248, 0.15);
-            border-color: #38bdf8;
-            transform: translateY(-2px);
-        }
-
-        .ad-badge {
-            display: inline-block;
-            background: #0284c7;
-            color: #fff;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .ad-text {
-            color: #f8fafc;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        /* Input Glass Box */
-        .chat-input-box {
             width: 100%;
-            height: 100px;
-            background: rgba(2, 6, 23, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 18px;
-            padding: 15px;
-            color: #fff;
-            font-size: 0.95rem;
-            resize: none;
-            outline: none;
-            transition: all 0.3s;
-            margin-bottom: 18px;
+            max-width: 400px;
         }
-
-        .chat-input-box:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-        }
-
-        /* Control Row */
-        .controls-row {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .btn-generate {
+        .tab-btn {
             flex: 1;
-            padding: 16px;
-            border: none;
-            border-radius: 16px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #fff;
-            background: linear-gradient(135deg, #00f2fe, #4facfe, #7928ca);
-            background-size: 200% 200%;
-            animation: gradientMove 4s ease infinite;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(0, 242, 254, 0.35);
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .btn-generate:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(121, 40, 202, 0.6);
-        }
-
-        /* Glowing (+) Image Upload Button */
-        .upload-plus-btn {
-            position: relative;
-            width: 55px;
-            height: 55px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, #00f2fe, #ff007f);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: #fff;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
-            transition: all 0.3s;
-        }
-
-        .upload-plus-btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.8);
-        }
-
-        .upload-plus-btn input[type="file"] {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        /* AI Chat Assistant Section */
-        .ai-chat-section {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .ai-chat-section h3 {
-            font-size: 1.1rem;
-            color: #38bdf8;
-            margin-bottom: 12px;
-        }
-
-        .chat-output {
-            background: rgba(2, 6, 23, 0.8);
-            border-radius: 16px;
-            padding: 15px;
-            min-height: 80px;
-            font-size: 0.9rem;
-            color: #cbd5e1;
-            white-space: pre-wrap;
-            margin-top: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .btn-chat {
-            width: 100%;
             padding: 12px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #fff;
-            border-radius: 14px;
+            border: none;
+            border-radius: 15px;
+            background: transparent;
+            color: #94a3b8;
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
         }
-
-        .btn-chat:hover {
-            background: #38bdf8;
-            color: #000;
+        .tab-btn.active {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
         }
 
-        /* Result Area */
-        .loading-text {
+        /* Glass Panel */
+        .content-panel {
             display: none;
-            margin-top: 15px;
-            color: #38bdf8;
-            text-align: center;
-        }
-
-        .result-box {
-            display: none;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .result-box img {
             width: 100%;
-            border-radius: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 30px;
         }
+        .content-panel.active { display: block; }
 
-        .btn-download {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 28px;
-            background: #fff;
-            color: #000;
-            text-decoration: none;
-            border-radius: 14px;
-            font-weight: 700;
-        }
+        /* UI Elements */
+        textarea { width: 100%; height: 120px; background: #020617; border: 1px solid #1e293b; border-radius: 15px; padding: 15px; color: #fff; margin-bottom: 15px; outline: none; }
+        .btn-action { width: 100%; padding: 15px; border: none; border-radius: 15px; background: linear-gradient(135deg, #7928ca, #ff007f); color: #fff; font-weight: 700; cursor: pointer; animation: pulse 2s infinite; }
+        
+        @keyframes pulse { 0% { box-shadow: 0 0 10px #7928ca; } 50% { box-shadow: 0 0 25px #ff007f; } 100% { box-shadow: 0 0 10px #7928ca; } }
+        
+        .result-area { margin-top: 20px; text-align: center; }
+        img { width: 100%; border-radius: 15px; }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow">
-        <div class="liquid-blob blob-1"></div>
-        <div class="liquid-blob blob-2"></div>
+    <!-- Ad Wrapper -->
+    <div style="width: 100%; max-width: 600px; margin-bottom: 20px;">
+        <iframe src="https://www.effectivecpmnetwork.com/wxfnq4wq2j?key=66e25978eb21df681c2911918ba91681" style="width:100%; height:60px; border:none; border-radius:10px;"></iframe>
     </div>
 
-    <div class="glass-card">
-        <h1>Vineth AI Studio</h1>
-        <p class="subtitle">Ultra-HD Sri Lankan DJ Remix Thumbnails & Smart AI Assistant</p>
+    <!-- Tab Switcher -->
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="showTab('thumbTab', this)">🎨 Thumbnail</button>
+        <button class="tab-btn" onclick="showTab('chatTab', this)">💬 AI Assistant</button>
+    </div>
 
-        <!-- Banner Ad Block linking to Adsterra Direct Link -->
-        <a href="https://www.effectivecpmnetwork.com/wxfnq4wq2j?key=66e25978eb21df681c2911918ba91681" target="_blank" class="ad-banner-box">
-            <span class="ad-badge">SPONSORED</span>
-            <div class="ad-text">✨ Powered by Adsterra Ads Network - Click to Support Us</div>
-        </a>
-
-        <textarea id="promptInput" class="chat-input-box" placeholder="මෙතන ඔයාට ඕන පින්තූරය හෝ ප්‍රශ්නය ටයිප් කරන්න... (උදා: DJ Nonstop Bus Remix background)"></textarea>
-
-        <div class="controls-row">
-            <button class="btn-generate" onclick="handleGenerate()">Generate Thumbnail ✨</button>
-            <div class="upload-plus-btn" title="Upload Reference Image">
-                +
-                <input type="file" id="imgUpload" accept="image/*">
-            </div>
+    <!-- Tab 1: Thumbnail -->
+    <div id="thumbTab" class="content-panel active">
+        <h2>Generate Thumbnail</h2>
+        <textarea id="thumbInput" placeholder="Thumbnail එකට අවශ්‍ය විස්තරය ලියන්න..."></textarea>
+        <button class="btn-action" onclick="generateThumb()">Generate Now ✨</button>
+        <div id="thumbResult" class="result-area" style="display:none;">
+            <img id="outputImg" src="">
         </div>
+    </div>
 
-        <div class="loading-text" id="loader">
-            🌊 Creating Ultra-HD Sri Lankan Style Thumbnail... කරුණාකර රැඳී සිටින්න...
-        </div>
-
-        <div class="result-box" id="resultArea">
-            <img id="outputImg" src="" alt="AI Thumbnail">
-            <br>
-            <a href="#" id="downloadBtn" download="vineth-ai-thumbnail.png" class="btn-download">Download Image 📥</a>
-        </div>
-
-        <!-- Smart AI Assistant Section -->
-        <div class="ai-chat-section">
-            <h3>💬 Ask AI Anything (YouTube & Content Creator Assistant)</h3>
-            <button class="btn-chat" onclick="handleAIChat()">Ask AI / Get YouTube Ideas 🚀</button>
-            <div class="chat-output" id="chatOutput">ඔබට අවශ්‍ය ඕනෑම දෙයක් උඩ Box එකේ ටයිප් කර මෙම Button එක Click කරන්න...</div>
-        </div>
+    <!-- Tab 2: AI Chat -->
+    <div id="chatTab" class="content-panel">
+        <h2>AI Assistant</h2>
+        <textarea id="chatInput" placeholder="ප්‍රශ්නයක් අහන්න..."></textarea>
+        <button class="btn-action" onclick="askAI()">Ask AI 🚀</button>
+        <div id="chatResult" class="result-area" style="color:#cbd5e1;"></div>
     </div>
 
     <script>
-        function handleGenerate() {
-            const prompt = document.getElementById('promptInput').value;
-            const loader = document.getElementById('loader');
-            const resultArea = document.getElementById('resultArea');
-            const outputImg = document.getElementById('outputImg');
-            const downloadBtn = document.getElementById('downloadBtn');
-
-            if (!prompt) {
-                alert("කරුණාකර පින්තූරයට අවශ්‍ය විස්තරය ලියන්න!");
-                return;
-            }
-
-            // Open Smartlink Ad on Generate Action
-            window.open("https://www.effectivecpmnetwork.com/wxfnq4wq2j?key=66e25978eb21df681c2911918ba91681", "_blank");
-
-            loader.style.display = "block";
-            resultArea.style.display = "none";
-
-            // Enhanced prompt for Sri Lankan Bus & DJ Remix Style
-            const optimizedPrompt = "Sri Lankan modified DJ bus, neon glowing party lights, vibrant colorful 3D typography, high bass dj music background, beautiful girl side portrait, ultra detailed, 8k resolution, cinematic, " + encodeURIComponent(prompt);
-            
-            const seed = Math.floor(Math.random() * 999999);
-            const imgUrl = `https://image.pollinations.ai/prompt/${optimizedPrompt}?width=1280&height=720&nologo=true&seed=${seed}`;
-
-            outputImg.src = imgUrl;
-            outputImg.onload = function() {
-                loader.style.display = "none";
-                resultArea.style.display = "block";
-                downloadBtn.href = imgUrl;
-            };
+        function showTab(tabId, btn) {
+            document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
         }
 
-        function handleAIChat() {
-            const query = document.getElementById('promptInput').value;
-            const output = document.getElementById('chatOutput');
+        function generateThumb() {
+            const prompt = document.getElementById('thumbInput').value;
+            if(!prompt) return alert("කරුණාකර විස්තරයක් ලියන්න");
+            
+            // Image Prompt Optimization Logic
+            const finalPrompt = `Ultra-HD, 8k, cinematic, Sri Lankan DJ Remix background, ${prompt}`;
+            const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?width=1280&height=720&nologo=true&seed=${Math.random()}`;
+            
+            const imgEl = document.getElementById('outputImg');
+            imgEl.src = imgUrl;
+            document.getElementById('thumbResult').style.display = 'block';
+        }
 
-            if (!query) {
-                alert("කරුණාකර ප්‍රශ්නයක් ටයිප් කරන්න!");
-                return;
-            }
-
-            output.innerText = "🤖 AI Thinking...\n\n";
-
-            setTimeout(() => {
-                output.innerText = `💡 AI Smart Response:\n\n'${query}' පිළිබඳ උපදෙස්:\n\n1. YouTube Title Idea: ${query} | Official Nonstop Remix 2026 🔥\n2. Tags: #${query.replace(/\s+/g, '')} #SinhalaDJ #DJRemix #TrendingLK\n3. Description: Enjoy the latest ${query} DJ Remix in Ultra HD Sound!`;
-            }, 800);
+        function askAI() {
+            const q = document.getElementById('chatInput').value;
+            const res = document.getElementById('chatResult');
+            res.innerText = "🤖 AI සොයමින් පවතී... (මෙම කොටසට ඔයාගේ AI API එක සම්බන්ධ කළ හැක)";
         }
     </script>
 </body>
